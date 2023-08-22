@@ -1,0 +1,15 @@
+ .navMenuList {
+     display: flex;
+ }
+
+ .navMenuListItem {
+     list-style: none;
+     margin-right: 16px;
+     font-weight: 600;
+ }
+
+ .nav-menu-list_item a {
+     text-decoration: none;
+ }
+
+ 
