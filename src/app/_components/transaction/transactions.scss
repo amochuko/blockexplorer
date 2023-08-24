@@ -15,9 +15,10 @@
         display: flex;
     }
 
-    .second-block{
+    .second-block {
         display: flex;
     }
+
     .header-block {
         h3 {
             font-weight: 600;
@@ -31,9 +32,8 @@
         display: none;
     }
 
-    .truncateHexString{
+    .truncateHexString {}
 
-    }
     .unordered-list {
         list-style: none;
 
@@ -56,7 +56,7 @@
         font-size: 14px;
     }
 
-    .value {
+    .tx_value {
         border-radius: 6px;
         border: 1px solid $borderColorExplore;
         padding: 4px;

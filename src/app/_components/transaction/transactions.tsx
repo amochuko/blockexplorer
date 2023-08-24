@@ -47,7 +47,7 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
               <ul className='unordered-list'>
                 {blockTransactions.length > 0 &&
                   blockTransactions
-                    ?.filter((_, i) => i <= 3)
+                    ?.filter((_, i) => i < 5)
                     .map((txn, i) => (
                       <li
                         key={txn.blockNumber! * Math.random() + i}
@@ -55,8 +55,8 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
                       >
                         <div className='first-block'>
                           <div className='icon'>❒</div>
-                          <span className='title'>Txn#: </span>
-                          <Link className='links' href={`txs/${txn.hash}`}>
+                          <span className='title'>Txn#:</span>
+                            <Link className='links' href={`txs/${txn.hash}`}>{'  '}
                             {truncateHexString({
                               hexString: txn.hash,
                               letterCount: 14,
@@ -95,7 +95,7 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
                             })}
                           </Link>{' '}
                           <ToolTip title='Amount'>
-                            <span className='value'>
+                            <span className='tx_value'>
                               {weiToEther({ wei: txn.value })} Eth
                             </span>
                           </ToolTip>
@@ -105,9 +105,7 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
               </ul>
             </div>
             <div className='footer-block'>
-              <div>
-                <Link href={'/txs'}>View all Transactions -&gt;</Link>
-              </div>
+              <Link href={'/txs'}>View all Transactions -&gt;</Link>
             </div>
           </>
         )}
