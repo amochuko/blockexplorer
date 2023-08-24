@@ -1,0 +1,62 @@
+@import '../../styles/blockexplore';
+@import '../../styles/custom';
+
+
+.dashboard {
+    display: flex;
+
+    &-header {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgb(106, 101, 101);
+        border-radius: 8px;
+        width: 80vw;
+
+        @include tablet {
+            flex-direction: row;
+            width: auto;
+
+        }
+    }
+
+    &-list-itm {
+        background-color: #5e5d5d1a;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 12px;
+        padding: 12px;
+        border-radius: 4px;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &-main {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+
+        @include tablet {
+            flex-direction: row;
+
+        }
+    }
+
+    .title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #f0f0f0a1;
+    }
+
+    .value {
+        font-size: 18px;
+    }
+
+    .dashboard-tnx-list {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+}
