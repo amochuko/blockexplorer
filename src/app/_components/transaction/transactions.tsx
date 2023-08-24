@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { ErrorBoundary } from '../hoc/error-boundary';
 import { useEthProvider } from '../hooks/useEthProvider';
 import { ToolTip } from '../tool-tip/tooltip';
-import './transaction.scss';
+import './transactions.scss';
 
 interface BlockWithTransactionsProps {
   block: Block | undefined;
@@ -24,14 +24,13 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
 
   useEffect(() => {
     try {
-        props.block?.transactions.map(async (hash) => {
-      const tnxs = await provider.getTransaction(hash);
-      setBlockTransactions((prevTxn) => [...prevTxn, tnxs]);
-    });
-    } catch (err:any) {
-      setError(err.message)
+      props.block?.transactions.map(async (hash) => {
+        const tnxs = await provider.getTransaction(hash);
+        setBlockTransactions((prevTxn) => [...prevTxn, tnxs]);
+      });
+    } catch (err: any) {
+      setError(err.message);
     }
-  
   }, [props.block?.transactions]);
 
   return (
@@ -41,7 +40,7 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
           <p>{error.message}</p>
         ) : (
           <>
-            <div className='header'>
+            <div className='header-block'>
               <h3>Latest Transactions</h3>
             </div>
             <div className='body'>
@@ -55,9 +54,9 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
                         className='list'
                       >
                         <div className='first-block'>
-                          <div className='icon'>🧱</div>
+                          <div className='icon'>❒</div>
                           <span className='title'>Txn#: </span>
-                          <Link className='links' href={`tx/${txn.hash}`}>
+                          <Link className='links' href={`txs/${txn.hash}`}>
                             {truncateHexString({
                               hexString: txn.hash,
                               letterCount: 14,
@@ -97,7 +96,7 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
                           </Link>{' '}
                           <ToolTip title='Amount'>
                             <span className='value'>
-                              {weiToEther(txn.value)} Eth
+                              {weiToEther({ wei: txn.value })} Eth
                             </span>
                           </ToolTip>
                         </div>
@@ -105,7 +104,7 @@ export function BlockTransactions(props: BlockWithTransactionsProps) {
                     ))}
               </ul>
             </div>
-            <div className='footer'>
+            <div className='footer-block'>
               <div>
                 <Link href={'/txs'}>View all Transactions -&gt;</Link>
               </div>
