@@ -3,7 +3,7 @@ import { Roboto } from 'next/font/google';
 import { Suspense } from 'react';
 import { Footer } from './_components/footer/footer';
 import { NavBar } from './_components/nav-bar/navBar';
-import './globals.css';
+import './globals.scss';
 import Loading from './loading';
 import { Providers } from './providers';
 import { navMenuList } from './api/data';
