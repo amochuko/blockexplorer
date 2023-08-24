@@ -11,10 +11,12 @@ interface BlockWithTransactionsProps {
 export function useBlock(blkNumber?: number) {
   const [block, setBlock] = useState<Block>();
   const [error, setError] = useState<any>({});
-  const provider = ethProvider();
+  const [pendingTxns, setPendingTxns] = useState(0);
+  const [finalizedBlock, setFinalizedBlock] = useState(0);
   const [blockTransactions, setBlockTransactions] = useState<
     TransactionResponse[]
   >([]);
+  const provider = ethProvider();
 
   const getBlock = useCallback(
     async (num?: number) => {
@@ -35,8 +37,22 @@ export function useBlock(blkNumber?: number) {
     [provider]
   );
 
+  const pendingTx = useCallback(async () => {
+    const pendingBlk = await provider.getBlock('pending');
+    console.log('pendingTxn: ', pendingBlk.transactions.length);
+    setPendingTxns(pendingBlk.transactions.length);
+  }, []);
+
+  const finalizedBlk = useCallback(async () => {
+    const fBlk = await provider.getBlock('final');
+    console.log('pendingTxn: ', fBlk);
+    setFinalizedBlock(fBlk.number);
+  }, []);
+
   useEffect(() => {
     getBlock();
+    pendingTx();
+    finalizedBlk();
   }, []);
 
   useEffect(() => {
@@ -54,5 +70,7 @@ export function useBlock(blkNumber?: number) {
     block,
     blockTransactions,
     error,
+    pendingTxns,
+    finalizedBlock,
   };
 }
