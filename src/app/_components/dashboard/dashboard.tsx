@@ -39,7 +39,7 @@ export function Dashboard(props: any) {
       </ErrorBoundary>
 
       <div className='dashboard-main'>
-        <div className='latest-block'>
+        <div className='block-latest'>
           <LatestBlocks />
         </div>
 
