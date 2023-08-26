@@ -1,0 +1,40 @@
+@import '../../styles/blockexplore.scss';
+@import '../../styles/custom.scss';
+
+.header-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 90vw;
+    margin: auto;
+    gap: 12px;
+    margin-bottom: 24px;
+
+    .list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .list-itm {
+            padding: 12px;
+            border: 1px solid $borderColorExplore;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(22, 22, 46, 0.399);
+            gap: 8px;
+
+            .title {
+                font-weight: 500;
+                color: $faintGrey;
+            }
+
+            .value {
+                font-weight: 700;
+                font-size: 20px;
+            }
+        }
+    }
+}
