@@ -1,76 +1,51 @@
-@import '../../styles/blockexplore';
-@import '../../styles/custom';
+@import '../../styles/blockexplore.scss';
 
-
-.latest-trasactions {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid $borderColorExplore;
-    border-radius: 8px;
-    gap: 12px;
-    padding: 12px;
-    min-width: 350px;
-
-    .first-block {
-        display: flex;
-    }
-
-    .second-block {
-        display: flex;
-    }
-
-    .header-block {
-        h3 {
-            font-weight: 600;
-            font-size: 18px;
-            border-bottom: 1px solid $borderColorExplore;
-            padding-bottom: 12px;
-        }
-    }
-
-    .icon {
-        display: none;
-    }
-
-    .truncateHexString {}
-
-    .unordered-list {
-        list-style: none;
-
-        .list {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid $borderColorExplore;
-            gap: 4px;
-        }
-    }
-
-    .title {
-        font-weight: 600;
-    }
-
-    .links {
-        color: $linkColor;
-        font-size: 14px;
-    }
-
-    .tx_value {
-        border-radius: 6px;
+.transaction {
+    .main {
+        margin: auto;
         border: 1px solid $borderColorExplore;
-        padding: 4px;
-        font-size: 12px;
-    }
+        border-radius: 12px;
+        width: $mobileVW;
 
-    .third-block {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-    }
+        .info {
+            padding: 12px;
 
-    .time {
-        color: #ccccccb9;
-        font-size: 13px;
+            h3 {
+                font-weight: 700;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr {
+            padding: 12px;
+            border-bottom: 1px solid $borderColorExplore;
+            ;
+        }
+
+        tr:nth-child(even) {
+            // background-color: #f2f2f2;
+        }
+
+        .link {
+            color: $linkColor;
+        }
+
+        .inlined-span {
+            display: flex;
+            // flex-direction: row;
+            gap: 8px;
+            // border: 1px solid $borderColorExplore;
+        }
     }
 }

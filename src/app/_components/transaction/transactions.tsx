@@ -1,114 +1,131 @@
 'use client';
 
-import { timeAgo, truncateHexString, weiToEther } from '@/utils/lib';
+import { getTxnFee, timeAgo, truncateHexString, weiToEther } from '@/utils/lib';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
-import { Block } from '@ethersproject/providers';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ErrorBoundary } from '../hoc/error-boundary';
+import { useBlock } from '../hooks/useBlock';
 import { useEthProvider } from '../hooks/useEthProvider';
-import { ToolTip } from '../tool-tip/tooltip';
 import './transactions.scss';
 
-interface BlockWithTransactionsProps {
-  block: Block | undefined;
-}
-
-export function BlockTransactions(props: BlockWithTransactionsProps) {
-  const [blockTransactions, setBlockTransactions] = useState<
-    TransactionResponse[]
-  >([]);
-
+export function Transactions() {
+  //   const { blocks } = useBlocks();
+  const { blocks, pendingTxns } = useBlock();
+  const [txnHash, setTxnHash] = useState<string[]>([]);
+  const [txnResponse, setTxnResponse] = useState<TransactionResponse[]>([]);
   const provider = useEthProvider();
-  const [error, setError] = useState<any>({});
+
+  const setTransactionHash = useCallback(async () => {
+    for (let i = 0; i < blocks.length; i++) {
+      setTxnHash(blocks[i].transactions);
+    }
+  }, [blocks]);
 
   useEffect(() => {
-    try {
-      props.block?.transactions.map(async (hash) => {
-        const tnxs = await provider.getTransaction(hash);
-        setBlockTransactions((prevTxn) => [...prevTxn, tnxs]);
-      });
-    } catch (err: any) {
-      setError(err.message);
-    }
-  }, [props.block?.transactions]);
+    setTransactionHash();
+  }, [setTransactionHash]);
+
+  const getTransactions = useCallback(async () => {
+    txnHash.forEach(async (hash) => {
+      const txn = await provider.getTransaction(hash);
+      setTxnResponse((txnResp) => [...txnResp, txn]);
+    });
+  }, [txnHash]);
+
+  useEffect(() => {
+    getTransactions();
+  }, [getTransactions]);
 
   return (
     <ErrorBoundary>
-      <div className='latest-trasactions'>
-        {error.message ? (
-          <p>{error.message}</p>
-        ) : (
-          <>
-            <div className='header-block'>
-              <h3>Latest Transactions</h3>
-            </div>
-            <div className='body'>
-              <ul className='unordered-list'>
-                {blockTransactions.length > 0 &&
-                  blockTransactions
-                    ?.filter((_, i) => i < 5)
-                    .map((txn, i) => (
-                      <li
-                        key={txn.blockNumber! * Math.random() + i}
-                        className='list'
-                      >
-                        <div className='first-block'>
-                          <div className='icon'>❒</div>
-                          <span className='title'>Txn#:</span>
-                            <Link className='links' href={`txs/${txn.hash}`}>{'  '}
-                            {truncateHexString({
-                              hexString: txn.hash,
-                              letterCount: 14,
-                              positon: 'end',
-                              isEthAddress: false,
-                            })}
-                          </Link>{' '}
-                          <span className='time'>
-                            {timeAgo(txn.timestamp)} secs ago
-                          </span>
-                        </div>
-                        <div className='second-block'>
-                          <p className='text'>
-                            <span className='title'> From: </span>
-                            <Link
-                              className='links'
-                              href={`/address/${txn.from}`}
-                            >
-                              {truncateHexString({
-                                hexString: txn.from,
-                                letterCount: 8,
-                                positon: 'middle',
-                                isEthAddress: true,
-                              })}
-                            </Link>
-                          </p>
-                        </div>
-                        <div className='third-block'>
-                          <span className='title'>To:</span>
-                          <Link className='links' href={`/address/${txn.to}`}>
-                            {truncateHexString({
-                              hexString: txn.to!,
-                              letterCount: 8,
-                              positon: 'middle',
-                              isEthAddress: true,
-                            })}
-                          </Link>{' '}
-                          <ToolTip title='Amount'>
-                            <span className='tx_value'>
-                              {weiToEther({ wei: txn.value })} Eth
-                            </span>
-                          </ToolTip>
-                        </div>
-                      </li>
-                    ))}
-              </ul>
-            </div>
-            <div className='footer-block'>
-              <Link href={'/txs'}>View all Transactions -&gt;</Link>
-            </div>
-          </>
-        )}
+      <div className='transaction'>
+        <div className='main'>
+          <div className='info'>
+            <h3>More than {txnHash.length} txns found</h3>
+            <p>(Showing the last n records)</p>
+          </div>
+          {/* TODO: Add Pagination here */}
+          <div style={{ overflowX: 'auto' }}>
+            <table>
+              <thead>
+                <tr>
+                  {[
+                    'Txn Hash',
+                    'Block',
+                    'Age',
+                    'From',
+                    'To',
+                    'Value',
+                    'Txn Fee',
+                  ].map((itm, i) => (
+                    <th key={i}>{itm}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {txnResponse.map((txn, i) => (
+                  <tr key={i}>
+                    <td>
+                      <span>
+                        <Link className='link' href={`/txns/${txn.hash}`}>
+                          {truncateHexString({
+                            hexString: txn.hash,
+                            isEthAddress: false,
+                            letterCount: 18,
+                            positon: 'end',
+                          })}
+                        </Link>
+                      </span>
+                    </td>
+                    <td>
+                      <span>{txn.blockNumber}</span>
+                    </td>
+                    <td>
+                      <span>{timeAgo(txn.timestamp)}</span>
+                    </td>
+                    <td>
+                      <span>
+                        <Link className='link' href={`/address/${txn.from}`}>
+                          {truncateHexString({
+                            hexString: txn.from,
+                            isEthAddress: false,
+                            letterCount: 8,
+                            positon: 'middle',
+                          })}
+                        </Link>
+                      </span>
+                    </td>
+                    <td>
+                      <Link className='link' href={`/address/${txn.to}`}>
+                        {truncateHexString({
+                          hexString: String(txn.to),
+                          isEthAddress: false,
+                          letterCount: 8,
+                          positon: 'middle',
+                        })}
+                      </Link>
+                    </td>
+                    <td>
+                      <span>
+                        {weiToEther({ wei: txn.value, fractionDigits: 4 })}
+                      </span>
+                    </td>
+                    <td>
+                      <span>
+                        {getTxnFee(
+                          txn.gasLimit,
+                          txn.gasPrice!,
+                          txn.maxPriorityFeePerGas!
+                        )}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </ErrorBoundary>
   );
