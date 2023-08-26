@@ -1,0 +1,24 @@
+.tool-tip {
+    position: relative;
+
+
+    .title {
+        // position: absolute;
+        display: none;
+        font-size: 12px;
+        text-transform: capitalize;
+        border-radius: 8px;
+        border: 1px solid #ccccccb9;
+        background-color: #999;
+        padding: 4px;
+    }
+
+    &:hover {
+        .title {
+            // position: relative;
+            display: block;
+            top: 85;
+            left: 20;
+        }
+    }
+}

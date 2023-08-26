@@ -1,0 +1,50 @@
+$mainColor: #15023a;
+
+
+$smWidth: 600px;
+$mdWidth: 768px;
+$lgWidth: 920px;
+$xlgWidth: 1200px;
+
+/* media query */
+
+/* Extra small devices (phones, 600px and down) */
+@mixin mobile {
+
+  /* For mobile <= 600px */
+  @media only screen and (max-width: #{$smWidth}) {
+    @content;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@mixin tablet {
+
+  /* For tablets >= 600px */
+  @media (min-width: #{$smWidth}) {
+    @content;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin desktop {
+
+  /* For tablets >= 768px */
+  @media only screen and (min-width: #{$lgWidth}) {
+    @content;
+  }
+}
+
+/* Large devices (laptops/desktops, >= 992px */
+@media only screen and (min-width:992px) {}
+
+/* Extra large devices (large laptops and desktops, >= 1200px */
+@media only screen and (min-width:#{xlgWidth}) {}
+
+@mixin orientation {
+
+  /* For tablets >= 768px */
+  @media only screen and (orientation: landscape) {
+    @content;
+  }
+}
