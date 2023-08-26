@@ -1,0 +1,96 @@
+@import '../../../styles/blockexplore.scss';
+@import '../../../styles/custom.scss';
+
+.txn-details {
+    width: $mobileVW;
+    margin: auto;
+
+    .info {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid $borderColorExplore;
+
+        h3 {
+            font-weight: both;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            display: inline-block;
+            text-align: center;
+            width: 24px;
+            // height: 20px;
+            border: 1px solid $borderColorExplore;
+            padding: 2px;
+            margin-right: 4px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: 700;
+            background-color: rgb(38, 52, 66);
+        }
+    }
+
+    .badge {
+        padding: 2px 8px;
+        color: #fff;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 12px;
+        border: 1px solid $borderColorExplore;
+        background-color: #9d9fa6;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        margin-bottom: 24px;
+        border: 1px solid $borderColorExplore;
+        border-radius: 12px;
+        padding: 12px;
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 12px;
+
+            .key {
+                font-weight: 700;
+                color: rgb(146, 146, 148)
+            }
+
+            .value {}
+        }
+
+        .link {
+            color: $linkColor;
+        }
+
+
+    }
+
+    .divider {
+        border: 1px solid $borderColorExplore ;
+        margin: 24px 0;
+    }
+
+    .other-attributes {
+        
+        display: flex;
+        gap: 12px;
+
+    }
+
+    textarea {
+        padding-left: 8px;
+        border-radius: 4px;
+        background-color: rgb(38, 52, 66);
+        width: 240px;
+        height: 100px;
+        resize: none;
+    }
+}
