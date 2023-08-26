@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ErrorBoundary } from '../../hoc/error-boundary';
 
 import { useState } from 'react';
-import { HamburgerIcon } from '../../hamburger-icon';
+import { HamburgerIcon } from '../../../hide/hamburger-icon';
 import styles from './nav-menu-items.module.css';
 
 export const NavMenuItem = (props: any) => {
