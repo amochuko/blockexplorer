@@ -14,7 +14,10 @@ export function Dashboard(props: any) {
   const { ethPrice } = useEtherPrice();
 
   const data = [
-    { title: 'ether price', value: ethPrice },
+    {
+      title: 'ether price',
+      value: `$ ${formatNumToCurrency({ amt: ethPrice })}`,
+    },
     {
       title: 'Market cap',
       value: `$ ${formatNumToCurrency({ amt: getMarketCap() })}`,
@@ -28,12 +31,12 @@ export function Dashboard(props: any) {
       {error.message ? <p>error.message</p> : null}
       <Header data={data} />
 
-      <div className='dashboard-main'>
-        <div className='block-latest'>
+      <div className='main'>
+        <div className='latest-blocks'>
           <LatestBlocks blocks={blocks!} error={error} />
         </div>
 
-        <div className='latest-txn'>
+        <div className='latest-txns'>
           <LatestTransactions block={block} limit={5} />
         </div>
       </div>
