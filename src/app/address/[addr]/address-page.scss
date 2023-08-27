@@ -1,0 +1,84 @@
+@import '../../styles/blockexplore.scss';
+@import '../../styles/custom.scss';
+@import '../../_components/transaction/transactions.scss';
+
+.address {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: auto;
+
+    .intro {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 24px 0;
+        border-bottom: 1px solid $borderColorExplore;
+
+        .avatar {
+            display: inline-flex;
+            width: 25px;
+            height: 25px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .addr {
+            font-weight: 600;
+            text-align: center;
+        }
+
+    }
+
+
+    .heading {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        width: 94vw;
+        margin: auto;
+        gap: 20px;
+        margin-top: 32px;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            border: 1px solid $borderColorExplore;
+            padding: 12px;
+            gap: 16px;
+
+            .attr {
+                color: $faintGrey;
+                text-transform: uppercase;
+                margin-bottom: 4px;
+            }
+
+            .value {
+                font-weight: 600;
+            }
+
+            select {
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+            }
+
+            .link {
+                color: $linkColor;
+            }
+
+            .time {
+                color: $faintGrey;
+            }
+        }
+    }
+
+    .body{
+
+    }
+}

@@ -1,14 +1,15 @@
 'use client';
 import { timeAgo } from '@/utils/lib';
-import { ethProvider } from '@/utils/provider';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
-import { Block } from '@ethersproject/providers';
+import { Block, JsonRpcProvider } from '@ethersproject/providers';
 import { useCallback, useEffect, useState } from 'react';
+import { useProvider } from './useProvider';
 
 export function useBlock(blkNumber?: number) {
   const [block, setBlock] = useState<Block>();
   const [error, setError] = useState<any>({});
   const [pendingTxns, setPendingTxns] = useState(0);
+  const [networkUtilization, setNetworkUtilization] = useState(0);
   const [finalizedBlock, setFinalizedBlock] = useState(0);
   const [timeStamp, setTimeStamp] = useState(0);
   const [blockLatest, setBlockLatest] = useState<Block>();
@@ -16,20 +17,14 @@ export function useBlock(blkNumber?: number) {
   const [blockTransactions, setBlockTransactions] = useState<
     TransactionResponse[]
   >([]);
-  const provider = ethProvider();
+  const provider = useProvider();
 
-  const getBlock = useCallback(
-    async (num?: number) => {
-      let blk: Block;
+  const getBlockByNumber = useCallback(
+    async (blkNumber: number | string) => {
       try {
-        if (num) {
-          blk = await provider.getBlock(num);
-        } else {
-          num = await provider.getBlockNumber();
-          blk = await provider.getBlock(num);
-        }
+        console.log('blkNumber: ', blkNumber);
 
-        setBlock(blk);
+        return await provider.getBlock(blkNumber);
       } catch (err: any) {
         setError(err);
       }
@@ -55,8 +50,17 @@ export function useBlock(blkNumber?: number) {
   const setBlockEvent = useCallback(async (num: number) => {
     try {
       const blk = await provider.getBlock(num);
-
       setBlocks((prevBlk) => [...prevBlk!, blk]);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  }, []);
+
+  const getNetworkUtilization = useCallback(async () => {
+    // TODO: Get Newtork performance
+    try {
+      // const blk = await provider(num);
+      setNetworkUtilization(0);
     } catch (err: any) {
       setError(err.message);
     }
@@ -88,10 +92,10 @@ export function useBlock(blkNumber?: number) {
   }, [blocks, setBlockEvent, subscribeToBlocks, unsubscribeToBlocks]);
 
   useEffect(() => {
-    getBlock();
     pendingTx();
     finalizedBlk();
     getLatestBlock();
+    getNetworkUtilization();
   }, []);
 
   useEffect(() => {
@@ -105,15 +109,27 @@ export function useBlock(blkNumber?: number) {
     }
   }, [block?.transactions]);
 
-  
   return {
     block,
     blocks,
+    getBlockByNumber,
     blockTransactions,
     error,
     pendingTxns,
     finalizedBlock,
     blockLatest,
     timeStamp,
+    networkUtilization,
   };
+}
+
+async function getBlock(
+  args: 'pending' | 'finalized' | 'latest' | 'number',
+  provider: JsonRpcProvider
+) {
+  try {
+    return await provider.getBlock(args);
+  } catch (err: any) {
+    throw err.message;
+  }
 }

@@ -23,7 +23,7 @@ export function Dashboard(props: any) {
       value: `$ ${formatNumToCurrency({ amt: getMarketCap() })}`,
     },
     { title: 'last finalized block', value: finalizedBlock },
-    { title: 'Pending Tnx(s)', value: pendingTxns },
+    { title: 'Pending block(s)', value: pendingTxns },
   ];
 
   return (
