@@ -4,12 +4,13 @@
 .header-layout {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-
     width: $mobileVW;
     margin: auto;
-    gap: 12px;
     margin-bottom: 24px;
+
+    @include tablet{
+        max-width: $mdWidth;
+    }
 
     .list {
         list-style: none;
@@ -23,7 +24,7 @@
             border-radius: 12px;
             display: flex;
             flex-direction: column;
-            background-color: rgba(22, 22, 46, 0.399);
+            background-color: rgba(22, 22, 46, 0.433);
             gap: 8px;
 
             .title {

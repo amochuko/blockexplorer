@@ -2,9 +2,9 @@
 
 import { AggregatorV3InterfaceABI } from '@/abi/aggregatorV3Interface';
 import { AggregateContractAddress } from '@/constant';
-import { ethProvider } from '@/utils/provider';
 import { ethers } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';
+import { useProvider } from './useProvider';
 
 /**
  * @dev Use the ETH / USD contract from Chainlink oracle to get the dollar
@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const useEtherPrice = () => {
   const [ethPrice, setEthPrice] = useState(0);
-  const provider = ethProvider();
+  const provider = useProvider();
 
   const getEtherPrice = useCallback(async () => {
     const contract = new ethers.Contract(
