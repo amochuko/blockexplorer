@@ -34,10 +34,10 @@
 
     .truncateHexString {}
 
-    .unordered-list {
+    .list {
         list-style: none;
 
-        .list {
+        .item {
             display: flex;
             flex-direction: column;
             margin-bottom: 12px;
