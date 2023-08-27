@@ -17,17 +17,17 @@ export function LatestBlocks(props: LatestBlocksProps) {
           <p>{props.error.message}</p>
         ) : (
           <>
-            <div className='header-block'>
+            <div className='header'>
               <h3>Latest Blocks</h3>
             </div>
 
             <div className='body'>
-              <ul className='unordered-list'>
+              <ul className='list'>
                 {props.blocks.length > 0 &&
                   props.blocks
                     .filter((_, i) => i < 5)
                     .map((blk, i) => (
-                      <li key={blk.number + Math.random() * i} className='list'>
+                      <li key={blk.number + Math.random() * i} className='item'>
                         <div className='first-block'>
                           <span className='icon'>🧱</span>
                           <span className='title'>Block: </span>
@@ -71,7 +71,7 @@ export function LatestBlocks(props: LatestBlocksProps) {
               </ul>
             </div>
             <div className='footer-block'>
-              <Link href={'/blocks'}>view all blocks -&gt;</Link>
+              <Link href={'/blocks'}>view all blocks →</Link>
             </div>
           </>
         )}
