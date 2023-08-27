@@ -1,0 +1,33 @@
+@import '../../styles/blockexplore.scss';
+@import '../../styles/custom.scss';
+
+.nav {
+    display: flex;
+    max-width: $xlgWidth;
+    margin: auto;
+    flex-direction: column;
+
+    .nav-menu {
+        margin: 24px 0;
+        display: flex;
+    }
+
+    .price {
+        display: none;
+        font-size: 13px;
+        justify-content: space-evenly;
+        flex-direction: row;
+        margin-top: 8px;
+
+        @include tablet {
+            // position: fixed;
+            display: flex;
+        }
+
+        a {
+            text-decoration: none;
+            color: $linkColor;
+        }
+    }
+
+}
