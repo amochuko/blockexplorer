@@ -32,7 +32,7 @@ export function LatestTransactions(props: BlockWithTransactionsProps) {
     } catch (err: any) {
       setError(err.message);
     }
-  }, [props.block?.transactions]);
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -46,14 +46,14 @@ export function LatestTransactions(props: BlockWithTransactionsProps) {
                 <h3>Latest Transactions</h3>
               </div>
               <div className='body'>
-                <ul className='unordered-list'>
+                <ul className='list'>
                   {blockTransactions.length > 0 &&
                     blockTransactions
                       ?.filter((_, i) => i < props.limit!)
                       .map((txn, i) => (
                         <li
                           key={txn.blockNumber! * Math.random() + i}
-                          className='list'
+                          className='item'
                         >
                           <div className='first-block'>
                             <div className='icon'>❒</div>
@@ -108,7 +108,7 @@ export function LatestTransactions(props: BlockWithTransactionsProps) {
                 </ul>
               </div>
               <div className='footer-block'>
-                <Link href={'/txns'}>View all Transactions -&gt;</Link>
+                <Link href={'/txns'}>View all Transactions →</Link>
               </div>
             </>
           )}

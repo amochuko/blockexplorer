@@ -1,0 +1,72 @@
+@import '../../../styles/blockexplore.scss';
+@import '../../../styles/custom.scss';
+
+.blocks {
+    padding: 12px;
+
+    .main {
+        margin: auto;
+        border: 1px solid $borderColorExplore;
+        border-radius: 12px;
+        width: $mobileVW;
+
+        @include desktop {
+            width: 1200px;
+        }
+
+        .info {
+            padding: 12px;
+
+            .headTitle {
+                font-weight: 700;
+            }
+            .subTitle{
+                font-size: 12px;
+                color: $faintGrey;
+            }
+
+        }
+
+        .header {
+            border-bottom: 1px solid $borderColorExplore;
+
+            .title {
+                font-weight: bold;
+                font-size: 12px;
+                margin-right: 12px;
+                margin-bottom: 10px;
+                min-width: 120px;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 0 8px 0;
+        }
+
+        td {
+            height: 42px;
+        }
+
+        tr {
+            display: table-row;
+            border-bottom: 1px solid $borderColorExplore;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+
+        .link {
+            color: $linkColor;
+        }
+    }
+}

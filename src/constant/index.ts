@@ -9,5 +9,7 @@ export const CryptoDevsDAOAddress =
   '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0';
 
 export  const AggregateContractAddress = '0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e';
+export { AggregatorV3InterfaceABI } from '../abi/aggregatorV3Interface';
+
 export const CryptoDevsDAOABI = CryptoDevsDAO_ABI;
 export const CryptoDevNFTABI = CryptoDevNFT_ABI;

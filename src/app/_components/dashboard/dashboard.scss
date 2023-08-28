@@ -5,53 +5,15 @@
 .dashboard {
     display: flex;
 
-    &-header {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgb(106, 101, 101);
-        border-radius: 8px;
-        width: 90vw;
-
-        @include tablet {
-            flex-direction: row;
-            width: 80vw;
-            justify-content: space-around;
-
-        }
-    }
-
-    &-list-itm {
-        background-color: #5e5d5d1a;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin: 12px;
-        padding: 12px;
-        border-radius: 4px;
-
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-
-    &-main {
+    .main {
         display: flex;
         flex-direction: column;
         gap: 48px;
         
-
         @include tablet {
-            // flex-direction: row;
-            width: 90vw;
-
-        }
-
-        @include desktop {
             flex-direction: row;
-            // width: 90vw;
-            margin: auto;
             justify-content: space-evenly;
-
+            gap: 24px;
         }
     }
 

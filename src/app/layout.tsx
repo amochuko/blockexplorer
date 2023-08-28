@@ -3,10 +3,10 @@ import { Roboto } from 'next/font/google';
 import { Suspense } from 'react';
 import { Footer } from './_components/footer/footer';
 import { NavBar } from './_components/nav-bar/navBar';
+import { navMenuList } from './api/data';
 import './globals.scss';
 import Loading from './loading';
 import { Providers } from './providers';
-import { navMenuList } from './api/data';
 
 const roboto = Roboto({ subsets: ['latin'], weight: '400', display: 'swap' });
 
@@ -29,7 +29,7 @@ export default function RootLayout(props: LayoutProps) {
         {/* <WebVitals /> */}
         <Suspense fallback={<Loading />}>
           <Providers>
-            <NavBar navMenuList={navMenuList} />
+            <NavBar navMenuList={navMenuList}  logoTitle='MBlock Explorer' />
             <Suspense fallback={<Loading />}>
               <div style={{ paddingBottom: '3rem' }}>{props.children}</div>
             </Suspense>

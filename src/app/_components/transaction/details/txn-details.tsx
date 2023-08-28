@@ -12,7 +12,7 @@ interface TnxDetailsProps {
   tnxHash: string;
 }
 export function TxnsDetails(props: TnxDetailsProps) {
-  const [txnResponse, setTxnResponse] = useState<TransactionResponse >({});
+  const [txnResponse, setTxnResponse] = useState<TransactionResponse>({});
   const provider = useEthProvider();
 
   async function getTransaction(txnHash: string) {

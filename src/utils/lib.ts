@@ -158,6 +158,7 @@ export const convertWei = (args: ConvertWeiArgs) => {
  */
 export const etherToDollars = (ether: string | number) => {
   // TODO: fix the stub
+  
   return ether;
 };
 
@@ -174,6 +175,40 @@ export const getTxnFee = (
 
   return 'n';
 };
+
+/**
+ * @dev Calculates miner's reward
+ * @param args0 BigNumber, args1 BigNumber
+ * @returns BigNumber in ETH
+ */
+export const calculateMinerReward = (args0: any, args1:any) => {
+  // TODO: calculate reward of the miner
+
+  return 'TODO';
+};
+
+/**
+ * @dev Calculates burnt Fees
+ * @param args0 BigNumber, args1 BigNumber
+ * @returns BigNumber in ETH
+ */
+export const calculateBurntFee = (args0: any, args1:any) => {
+  // TODO: calculate reward of the miner
+
+  return 'TODO';
+};
+
+/**
+ * @dev Calculates burnt Fees
+ * @param args0 BigNumber, args1 BigNumber
+ * @returns BigNumber in ETH
+ */
+export const calculatePercentGasUsage = (gasUsed: any) => {
+  // TODO: calculate calculatePercentGasUsage
+
+  return 'TODO'; // (gasLimit - gasUsed) / 100 * gasUsed
+};
+
 
 // TODO: fix function
 export const titleCase = (str: string) => {

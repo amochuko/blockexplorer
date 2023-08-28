@@ -7,11 +7,11 @@ import { ErrorBoundary } from '../hoc/error-boundary';
 import { useEtherPrice } from '../hooks/useEtherPrice';
 import { useGasPrice } from '../hooks/useGasPrice';
 import { NavMenuItem } from './nav-bar-menu/nav-menu-items';
-import './nav-bar.css';
-import { SearchBar } from '../search/search-form';
+import './nav-bar.scss';
 
 interface NavBarProps {
   navMenuList?: any[];
+  logoTitle: string;
 }
 
 export type NavPropsType = {
@@ -26,30 +26,25 @@ export function NavBar(props: NavBarProps) {
 
   return (
     <nav className='nav'>
-      <div className='nav-menu'>
-        <Logo title='MBlock Explorer' />
-        <NavMenuItem menuItems={props.navMenuList} />
-      </div>
-
       <ErrorBoundary>
         <div className='price'>
           {ethPrice > 0 && (
-            <div className='ether-price'>
-              <span>
-                ETH Price: <Link href={'#'}>${ethPrice}</Link>
-              </span>
-            </div>
+            <span>
+              ETH Price: <Link href={'#'}>${ethPrice}</Link>
+            </span>
           )}
           {gasPrice > 0 && (
-            <div className='gas-price'>
-              <span>
-                {' '}
-                Gas Price: <Link href={'#'}>{gasPrice} Gwei</Link>
-              </span>
-            </div>
+            <span>
+              ⛽️ <Link href={'#'}>{gasPrice} Gwei</Link>
+            </span>
           )}
         </div>
       </ErrorBoundary>
+      <div className='nav-menu'>
+        <Logo title={props.logoTitle} />
+        <NavMenuItem menuItems={props.navMenuList} />
+      </div>
+
       <div className='search-form'>
         {/* TODO: enable search */}
         {/* <SearchBar /> */}

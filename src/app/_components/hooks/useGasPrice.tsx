@@ -13,11 +13,15 @@ export const useGasPrice = () => {
   const provider = ethProvider();
 
   const gPrice = useCallback(async () => {
-    const blkNum = await provider.getBlockNumber();
-    const block = await provider.getBlock(blkNum);
-    const fee = block.baseFeePerGas?.toString();
+    try {
+      const blkNum = await provider.getBlockNumber();
+      const block = await provider.getBlock(blkNum);
+      const fee = block.baseFeePerGas?.toString();
 
-    setGasPrice(fee);
+      setGasPrice(fee);
+    } catch (err: any) {
+      console.log(err.message);
+    }
   }, [provider]);
 
   useEffect(() => {

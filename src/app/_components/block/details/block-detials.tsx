@@ -3,7 +3,7 @@ import { Block } from '@ethersproject/providers';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { ErrorBoundary } from '../../hoc/error-boundary';
-import './block-details.css';
+import './block-details.scss';
 
 interface BlockDetailsProps {
   block: Block;
