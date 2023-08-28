@@ -1,18 +1,23 @@
 'use client';
 import { ethers } from 'ethers';
+import { NEXT_PUBLIC_ALCHEMY_API_TESTNET } from './config';
 
 /**
  * @dev Function provides access to ethereum node
  * @returns
  */
 export const ethProvider = () => {
-  let provider = new ethers.providers.JsonRpcProvider();
+  let provider;
 
-  // if (window.navigator.onLine) {
-  //   provider = new ethers.providers.JsonRpcProvider(providerURL);
-  // } else {
-  //   provider = ethers.getDefaultProvider();
-  // }
+  try {
+    if (process.env.NODE_ENV !== 'production') {
+      provider = new ethers.providers.JsonRpcProvider();
+    } else {
+      provider = ethers.getDefaultProvider(NEXT_PUBLIC_ALCHEMY_API_TESTNET);
+    }
 
-  return provider;
+    return provider;
+  } catch (err: any) {
+    throw Error(err.message);
+  }
 };

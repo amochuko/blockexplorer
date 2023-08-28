@@ -22,12 +22,16 @@ export const useEtherPrice = () => {
       provider
     );
 
-    const [_, answer] = await contract.functions.latestRoundData();
-    const decimals = await contract.functions?.decimals();
+    try {
+      const [_, answer] = await contract.functions.latestRoundData();
+      const decimals = await contract.functions?.decimals();
 
-    const u = (parseInt(answer) / 10 ** decimals).toFixed(2);
+      const u = (parseInt(answer) / 10 ** decimals).toFixed(2);
 
-    setEthPrice(+u);
+      setEthPrice(+u);
+    } catch (err: any) {
+      console.log(err.message);
+    }
   }, [provider]);
 
   useEffect(() => {

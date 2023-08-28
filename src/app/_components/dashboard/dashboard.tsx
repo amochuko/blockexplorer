@@ -28,6 +28,7 @@ export function Dashboard(props: any) {
 
   return (
     <div className='dashboard'>
+      {block?.transactions.length}
       {error.message ? <p>error.message</p> : null}
       <Header data={data} />
 

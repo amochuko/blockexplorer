@@ -32,7 +32,7 @@ export function LatestTransactions(props: BlockWithTransactionsProps) {
     } catch (err: any) {
       setError(err.message);
     }
-  }, [props.block?.transactions]);
+  }, []);
 
   return (
     <ErrorBoundary>
