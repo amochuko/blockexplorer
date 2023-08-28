@@ -26,23 +26,23 @@ export default function AddressPage(props: AddressPageProps) {
   const [txnResponse, setTxnResponse] = useState<TransactionResponse[]>([]);
   const provider = useProvider();
 
-  const parseToEther = (val: string) => ethers.utils.parseEther(val);
+  const parseToEther = (val: string) => {
+    const res = ethers.utils.formatEther(val);
+    return res;
+  };
   const getAddressDetails = useCallback(async () => {
     try {
       const bal = await provider.getBalance(props.params.addr);
-      console.log(bal);
+
       setBalance(parseToEther(bal.toString()));
     } catch (err: any) {
       setError(err.message);
     }
   }, [props.params]);
 
-  const lastTxnSent = useCallback(async() => {
-    const lastTxn = await provider.getTransactionCount(props.params.addr)
-
-
-  },[])
-
+  const lastTxnSent = useCallback(async () => {
+    const lastTxn = await provider.getTransactionCount(props.params.addr);
+  }, []);
 
   useEffect(() => {
     getAddressDetails();
